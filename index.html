@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Berru'ya Özel❤️</title>
+<style>
+    body {
+        background: #ffd6e7;
+        font-family: 'Comic Sans MS', cursive;
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #c40055;
+        font-size: 32px;
+        margin-top: 50px;
+    }
+
+    #buttons {
+        margin-top: 30px;
+        position: relative;
+        z-index: 1;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background-color: #ff4d8b;
+        color: white;
+        font-size: 20px;
+        padding: 10px 25px;
+    }
+
+    #no {
+        background-color: #aaa;
+        color: white;
+        position: absolute;
+    }
+
+    #message {
+        margin-top: 40px;
+        font-size: 26px;
+        color: #c40055;
+        font-weight: bold;
+        display: none;
+        position: relative;
+        z-index: 1;
+    }
+
+    .heart, .bunny {
+        position: absolute;
+        font-size: 30px;
+        animation: floatUp 3s linear forwards;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-500px) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<audio id="music" loop>
+    <source src="ati242.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Seni çok seviyorum ❤️<br>Beni affeder misin?</h1>
+
+<div id="buttons">
+    <button id="yes">Evet</button>
+    <button id="no">Hayır</button>
+</div>
+
+<div id="message">Affedeceğini biliyordum!<br>Seni çooook seviyorum balım ❤️</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    let yesSize = 20; // başlangıç font boyutu
+
+    // Hayır tuşu kaçıyor ve evet büyüyor
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        // Evet butonunu büyüt
+        yesSize += 5;
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding = (10 + yesSize/2) + "px " + (25 + yesSize/2) + "px";
+    });
+
+    // Evet tuşu tıklanınca mesaj çıkıyor
+    yesBtn.addEventListener("click", () => {
+        document.getElementById("message").style.display = "block";
+
+        // Müziği çal
+        document.getElementById("music").play();
+
+        // Kalpler oluştur
+        for (let i = 0; i < 30; i++) {
+            createHeart();
+        }
+    });
+
+    // Kalpler
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.textContent = "❤️";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+    }
+
+    // Tavşanları sürekli rastgele oluştur
+    function createBunny() {
+        const bunny = document.createElement("div");
+        bunny.classList.add("bunny");
+        bunny.style.left = Math.random() * window.innerWidth + "px";
+        bunny.style.top = Math.random() * window.innerHeight + "px";
+        bunny.textContent = "🐰";
+        document.body.appendChild(bunny);
+        setTimeout(() => bunny.remove(), 5000);
+    }
+
+    // Sürekli tavşan oluştur (her 0.5 saniyede)
+    setInterval(createBunny, 500);
+</script>
+
+</body>
+</html>
