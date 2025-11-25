@@ -9,6 +9,11 @@
         font-family: 'Comic Sans MS', cursive;
         margin: 0;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Dikey ortalama */
+        align-items: center;    /* Yatay ortalama */
+        height: 100vh;
         text-align: center;
         position: relative;
     }
@@ -16,15 +21,15 @@
     h1 {
         color: #c40055;
         font-size: 36px;
-        margin-top: 20px;
+        margin: 10px 0;
         z-index: 2;
         position: relative;
     }
 
     #buttons {
-        margin-top: 20px;
         z-index: 2;
         position: relative;
+        margin: 10px 0;
     }
 
     button {
@@ -35,7 +40,6 @@
         cursor: pointer;
         margin: 10px;
         transition: all 0.3s ease;
-        position: relative;
     }
 
     #yes {
@@ -53,21 +57,17 @@
         color: #c40055;
         font-weight: bold;
         display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         z-index: 3;
         text-align: center;
     }
 
     #bear {
         position: absolute;
+        font-size: 120px;
+        z-index: 1;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 120px;
-        z-index: 1;
     }
 
     .tear {
@@ -100,7 +100,6 @@
         100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
     }
 
-    /* Tavşan dans animasyonu */
     #bunny {
         display: none;
         position: absolute;
@@ -194,12 +193,10 @@ yesBtn.addEventListener("click", () => {
     bear.style.display = "none";
 
     message.style.display = "block";
-
     bunny.style.display = "block";
 
     music.play().catch(e => console.log("Müzik çalınamadı", e));
 
-    // Kalpleri uçur
     floatHearts();
 });
 </script>
