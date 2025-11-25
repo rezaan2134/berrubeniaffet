@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Berru'ya Özel❤️</title>
+<title>Berru'ya Özel ❤️</title>
 <style>
     body {
         background: #ffd6e7;
@@ -10,12 +10,13 @@
         text-align: center;
         margin: 0;
         overflow: hidden;
+        position: relative;
     }
 
     h1 {
         color: #c40055;
-        font-size: 32px;
-        margin-top: 50px;
+        font-size: 36px;
+        margin-top: 20px;
     }
 
     #buttons {
@@ -32,13 +33,12 @@
         cursor: pointer;
         margin: 10px;
         transition: all 0.3s ease;
+        position: relative;
     }
 
     #yes {
         background-color: #ff4d8b;
         color: white;
-        font-size: 20px;
-        padding: 10px 25px;
     }
 
     #no {
@@ -57,88 +57,100 @@
         z-index: 1;
     }
 
-    .heart, .bunny {
+    #bear {
         position: absolute;
-        font-size: 30px;
-        animation: floatUp 3s linear forwards;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 100px;
     }
 
-    @keyframes floatUp {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-500px) scale(1.5); opacity: 0; }
+    .tear {
+        position: absolute;
+        color: #00f;
+        font-size: 20px;
+        animation: fall 2s linear forwards;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(200px); opacity: 0; }
+    }
+
+    .bunny {
+        position: absolute;
+        font-size: 50px;
+        animation: dance 1s infinite alternate;
+    }
+
+    @keyframes dance {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(10deg); }
+        100% { transform: translateY(0) rotate(-10deg); }
     }
 </style>
 </head>
 <body>
 
-<audio id="music" loop>
-    <source src="ati242.mp3" type="audio/mpeg">
-</audio>
-
-<h1>Seni çok seviyorum ❤️<br>Beni affeder misin?</h1>
+<h1>Beni affeder misin? 🐻</h1>
 
 <div id="buttons">
     <button id="yes">Evet</button>
     <button id="no">Hayır</button>
 </div>
 
-<div id="message">Affedeceğini biliyordum!<br>Seni çooook seviyorum balım ❤️</div>
+<div id="message">Affedeceğini biliyordum!<br>Seni çok seviyorum ❤️</div>
+
+<div id="bear">🐻</div>
+
+<!-- Müzik -->
+<audio id="music" loop>
+    <source src="ati242.mp3" type="audio/mpeg">
+</audio>
 
 <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
-    let yesSize = 20; // başlangıç font boyutu
+    const bear = document.getElementById("bear");
+    const music = document.getElementById("music");
 
-    // Hayır tuşu kaçıyor ve evet büyüyor
+    // Hayır tuşu kaçıyor
     noBtn.addEventListener("mouseover", () => {
         const x = Math.random() * (window.innerWidth - 100);
         const y = Math.random() * (window.innerHeight - 50);
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
-
-        // Evet butonunu büyüt
-        yesSize += 5;
-        yesBtn.style.fontSize = yesSize + "px";
-        yesBtn.style.padding = (10 + yesSize/2) + "px " + (25 + yesSize/2) + "px";
     });
 
-    // Evet tuşu tıklanınca mesaj çıkıyor
+    // Gözyaşı oluştur
+    function createTear() {
+        const tear = document.createElement("div");
+        tear.classList.add("tear");
+        tear.textContent = "💧";
+        tear.style.left = (bear.offsetLeft + 30 + Math.random()*40) + "px";
+        tear.style.top = (bear.offsetTop + 20) + "px";
+        document.body.appendChild(tear);
+        setTimeout(() => tear.remove(), 2000);
+    }
+
+    // Sürekli gözyaşı
+    setInterval(createTear, 800);
+
+    // Evet tıklanınca
     yesBtn.addEventListener("click", () => {
         document.getElementById("message").style.display = "block";
 
-        // Müziği çal
-        document.getElementById("music").play();
-
-        // Kalpler oluştur
-        for (let i = 0; i < 30; i++) {
-            createHeart();
-        }
-    });
-
-    // Kalpler
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = window.innerHeight + "px";
-        heart.textContent = "❤️";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
-    }
-
-    // Tavşanları sürekli rastgele oluştur
-    function createBunny() {
+        // Tavşan oluştur
         const bunny = document.createElement("div");
         bunny.classList.add("bunny");
-        bunny.style.left = Math.random() * window.innerWidth + "px";
-        bunny.style.top = Math.random() * window.innerHeight + "px";
         bunny.textContent = "🐰";
+        bunny.style.left = (window.innerWidth/2 - 25) + "px";
+        bunny.style.top = (window.innerHeight/2) + "px";
         document.body.appendChild(bunny);
-        setTimeout(() => bunny.remove(), 5000);
-    }
 
-    // Sürekli tavşan oluştur (her 0.5 saniyede)
-    setInterval(createBunny, 500);
+        // Müziği çal
+        music.play().catch(error => console.log("Müzik çalınamadı: ", error));
+    });
 </script>
 
 </body>
