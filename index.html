@@ -3,124 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <title>Berru'ya Özel ❤️</title>
-<style>
-    body {
-        background: #ffd6e7;
-        font-family: 'Comic Sans MS', cursive;
-        margin: 0;
-        overflow: hidden;
-        text-align: center;
-        position: relative;
-        height: 100vh;
-    }
 
+<style>
+   body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Comic Sans MS", cursive;
+    text-align: center;
+
+    /* ROMANTİK ARKA PLAN */
+    background: linear-gradient(135deg, #ffb6d9, #ff92c7, #ffa3d1, #ff7ab8);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+
+    /* Kalp Deseni Overlay */
+    position: relative;
+}
+
+body::before {
+    content: "❤️ 💗 💕 💓 💞 💘";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 80px;
+    opacity: 0.12;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    pointer-events: none;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+    /* Üstteki başlık ve butonlar */
     #header {
         position: absolute;
-        top: 10%; /* GIF’in biraz üstünde */
+        top: 10%;
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
     }
 
     h1 {
-        color: #c40055;
         font-size: 50px;
+        color: #c40055;
         margin: 0 0 20px 0;
-    }
-
-    #buttons {
-        z-index: 2;
-        margin-top: 10px;
     }
 
     button {
         font-size: 30px;
-        padding: 15px 35px;
+        padding: 15px 40px;
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         cursor: pointer;
         margin: 10px;
-        transition: all 0.3s ease;
-        position: relative;
+        transition: 0.3s;
     }
 
-    #yes {
-        background-color: #ff4d8b;
-        color: white;
-    }
+    #yes { background: #ff4d8b; color: white; }
+    #no { background: #7d7d7d; color: white; }
 
-    #no {
-        background-color: #aaa;
-        color: white;
-    }
-
+    /* Mesaj */
     #message {
-        font-size: 50px;
+        font-size: 55px;
         color: #c40055;
-        font-weight: bold;
         display: none;
         position: absolute;
-        top: 10%;
+        top: 12%;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 3;
-        text-align: center;
+        z-index: 5;
     }
 
-    .heart {
-        position: absolute;
-        font-size: 25px;
-        color: #ff4d8b;
-        opacity: 0.7;
-        pointer-events: none;
-        user-select: none;
-    }
-
-    .floating {
-        animation: floatUp linear infinite;
-    }
-
-    @keyframes floatUp {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
-    }
-
-    .bunny {
-        display: none;
-        position: absolute;
-        font-size: 100px;
-        top: 60%;
-        z-index: 4;
-        animation: dance 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes dance {
-        0% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(-15deg); }
-        100% { transform: translateY(0) rotate(15deg); }
-    }
-
+    /* GIF - SEN KOYACAKSIN */
     #bearGif {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 200px;
+        max-width: 50vw;
+        max-height: 50vh;
+        width: auto;
+        height: auto;
         z-index: 1;
+    }
+
+    /* Sabit kalpler */
+    .heart {
+        position: absolute;
+        color: #ff4d8b;
+        opacity: 0.7;
+        font-size: 20px;
+        pointer-events: none;
+    }
+
+    /* Uçan kalpler */
+    .floating {
+        animation: floatUp 3s linear infinite;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0) scale(1); opacity: 1; }
+        to { transform: translateY(-600px) scale(1.5); opacity: 0; }
+    }
+
+    /* Dans eden tavşanlar */
+    .bunny {
+        display: none;
+        position: absolute;
+        font-size: 90px;
+        top: 60%;
+        animation: dance 1s infinite alternate;
+        z-index: 5;
+    }
+
+    @keyframes dance {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(-30px) rotate(12deg); }
     }
 </style>
 </head>
+
 <body>
 
 <div id="header">
     <h1 id="question">Beni affeder misin? 🐻</h1>
-    <div id="buttons">
-        <button id="yes">Evet</button>
-        <button id="no">Hayır</button>
-    </div>
+    <button id="yes">Evet</button>
+    <button id="no">Hayır</button>
 </div>
 
-<img id="bearGif" src="senin_gifin.gif" alt="Üzgün Ayı">
+<!-- AYICIK GİFİ - SEN KOYACAKSIN -->
+<img id="bearGif" src="giphy.gif" alt="Üzgün Ayı">
 
 <div id="message">Affedeceğini biliyordum!<br>Seni çok seviyorum balım ❤️</div>
 
@@ -131,67 +151,64 @@
 <script>
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
-const music = document.getElementById("music");
-const question = document.getElementById("question");
-const buttons = document.getElementById("buttons");
 const message = document.getElementById("message");
+const header = document.getElementById("header");
 const bearGif = document.getElementById("bearGif");
+const music = document.getElementById("music");
 
-// Tavşanları oluştur
+/* Tavşanlar */
 const bunnies = [];
 for (let i = 0; i < 5; i++) {
-    const bunny = document.createElement("div");
-    bunny.classList.add("bunny");
-    bunny.textContent = "🐰";
-    bunny.style.left = `${10 + i*18}%`;
-    document.body.appendChild(bunny);
-    bunnies.push(bunny);
+    const b = document.createElement("div");
+    b.className = "bunny";
+    b.textContent = "🐰";
+    b.style.left = (10 + i * 18) + "%";
+    document.body.appendChild(b);
+    bunnies.push(b);
 }
 
-// Evet butonunun başlangıç boyutu
-let yesSize = 1;
-let noClickCount = 0;
+/* Sabit kalpler */
+const hearts = [];
+for (let i = 0; i < 60; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.top = Math.random() * 100 + "vh";
+    h.style.fontSize = (10 + Math.random()*30) + "px";
+    document.body.appendChild(h);
+    hearts.push(h);
+}
 
-// Hayıra basıldıkça Evet büyüsün
+/* Hayıra basıldıkça evet büyüsün */
+let yesScale = 1;
+let noCount = 0;
+
 noBtn.addEventListener("click", () => {
-    noClickCount++;
-    yesSize += 0.15;
-    yesBtn.style.transform = `scale(${yesSize})`;
+    noCount++;
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
-    if (noClickCount >= 10) {
+    if (noCount >= 10) {
         yesBtn.style.position = "absolute";
-        yesBtn.style.top = "50%";
         yesBtn.style.left = "50%";
+        yesBtn.style.top = "50%";
         yesBtn.style.transform = "translate(-50%, -50%) scale(30)";
         yesBtn.style.zIndex = "10";
     }
 });
 
-// Sabit kalpler
-const staticHearts = [];
-for (let i = 0; i < 50; i++) {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.textContent = "❤️";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    heart.style.fontSize = `${10 + Math.random()*30}px`;
-    document.body.appendChild(heart);
-    staticHearts.push(heart);
-}
-
-function floatHearts() {
-    staticHearts.forEach(h => h.classList.add("floating"));
-}
-
-// Evet tuşuna basılınca
+/* Evet'e basınca */
 yesBtn.addEventListener("click", () => {
-    document.getElementById("header").style.display = "none";
+    header.style.display = "none";
     bearGif.style.display = "none";
     message.style.display = "block";
+
     bunnies.forEach(b => b.style.display = "block");
-    music.play().catch(e => console.log("Müzik çalınamadı", e));
-    floatHearts();
+
+    music.play().catch(()=>{});
+
+    hearts.forEach(h => h.classList.add("floating"));
 });
 </script>
 
