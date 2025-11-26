@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beni Affeder misin Balım? ❤️</title>
-
 <style>
 body {
     margin:0;
@@ -15,8 +14,8 @@ body {
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    justify-content:flex-start;
     background: linear-gradient(135deg, #ffb6d9, #ff92c7, #ffa3d1, #ff7ab8);
     background-size:400% 400%;
     animation:bgMove 12s ease infinite;
@@ -27,33 +26,16 @@ body {
     50% {background-position:100% 50%;}
     100% {background-position:0% 50%;}
 }
-body::before {
-    content:"❤️ 💗 💕 💓 💞 💘";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    font-size:8vw;
-    opacity:0.12;
-    display:flex;
-    justify-content:space-around;
-    flex-wrap:wrap;
-    pointer-events:none;
-}
-
 #question {
     font-size:clamp(22px,5vw,40px);
     font-weight:bold;
-    margin-top:5vh;
+    margin-bottom:20px;
     z-index:5;
-    width:90%;
 }
-
 button {
     font-size:clamp(20px,5vw,32px);
     padding:10px 35px;
-    margin:20px;
+    margin:10px;
     border:none;
     border-radius:15px;
     cursor:pointer;
@@ -65,70 +47,6 @@ button {
 #noBtn:hover {transform:scale(1.1); box-shadow:0 0 15px #ffb4d4;}
 #yesBtn {background:#ff4fa3; color:white;}
 #noBtn {background:#ffb4d4; color:white;}
-
-#sadBear {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-45%);
-    width:clamp(120px,35vw,250px);
-    z-index:3;
-}
-
-#danceBear {
-    position:absolute;
-    top:58%;
-    left:50%;
-    transform:translateX(-50%);
-    width:clamp(150px,40vw,300px);
-    display:none;
-    z-index:20;
-    animation:dance 1s infinite alternate;
-}
-
-@keyframes dance {
-    0% {transform:translate(-50%,0) rotate(0deg);}
-    100% {transform:translate(-50%,-20px) rotate(10deg);}
-}
-
-.heart {
-    position:absolute;
-    bottom:0;
-    font-size:clamp(20px,6vw,40px);
-    animation: floatUp 4s linear forwards, sparkle 1s ease-in-out infinite alternate;
-}
-@keyframes floatUp {
-    0% {transform:translateY(0); opacity:1;}
-    100% {transform:translateY(-70vh); opacity:0;}
-}
-@keyframes sparkle {
-    0% {opacity:1; transform:scale(1);}
-    50% {opacity:0.8; transform:scale(1.2);}
-    100% {opacity:1; transform:scale(1);}
-}
-
-#loveMessage {
-    font-size:clamp(26px,6vw,45px);
-    font-weight:bold;
-    display:none;
-    margin-top:10vh;
-    z-index:30;
-    width:90%;
-    animation:pop 0.6s ease forwards;
-}
-@keyframes pop {
-    0% {transform:scale(0.5); opacity:0;}
-    100% {transform:scale(1); opacity:1;}
-}
-
-.shake {animation: shakeAnim 0.5s infinite alternate;}
-@keyframes shakeAnim {
-    0% {transform:translate(-50%,-50%) rotate(0deg);}
-    50% {transform:translate(-48%,-50%) rotate(-1deg);}
-    100% {transform:translate(-52%,-50%) rotate(1deg);}
-}
-
-/* Ortadaki GIF / çıkartma */
 #centerSticker {
     position:absolute;
     top:50%;
@@ -136,6 +54,41 @@ button {
     transform:translate(-50%,-50%);
     width:clamp(150px,35vw,300px);
     z-index:10;
+}
+#danceBear {
+    position:absolute;
+    top:55%;
+    left:50%;
+    transform:translateX(-50%);
+    width:clamp(150px,40vw,300px);
+    display:none;
+    z-index:20;
+    animation:dance 1s infinite alternate;
+}
+@keyframes dance {
+    0% {transform:translate(-50%,0) rotate(0deg);}
+    100% {transform:translate(-50%,-20px) rotate(10deg);}
+}
+.heart {
+    position:absolute;
+    bottom:0;
+    font-size:clamp(20px,6vw,40px);
+    animation: floatUp 4s linear forwards;
+}
+@keyframes floatUp {
+    0% {transform:translateY(0); opacity:1;}
+    100% {transform:translateY(-70vh); opacity:0;}
+}
+#loveMessage {
+    font-size:clamp(26px,6vw,45px);
+    font-weight:bold;
+    display:none;
+    z-index:30;
+    animation:pop 0.6s ease forwards;
+}
+@keyframes pop {
+    0% {transform:scale(0.5); opacity:0;}
+    100% {transform:scale(1); opacity:1;}
 }
 </style>
 </head>
@@ -145,7 +98,7 @@ button {
 <button id="yesBtn">Evet</button>
 <button id="noBtn">Hayır</button>
 
-<!-- Ortadaki GIF sen ekleyeceksin -->
+<!-- Ortadaki GIF -->
 <img id="centerSticker" src="giphy.gif" alt="Ortadaki çıkartma">
 
 <img id="danceBear" src="rabbittobi.gif" alt="Dans Eden Ayı">
@@ -160,10 +113,8 @@ const noBtn=document.getElementById("noBtn");
 noBtn.addEventListener("click",()=>{
     noPressCount++;
     yesBtn.style.transform=`scale(${1+noPressCount*0.25})`;
-    yesBtn.classList.add("shake");
     if(noPressCount>=10){
         yesBtn.style.transform="scale(20)";
-        yesBtn.classList.remove("shake");
         noBtn.style.display="none";
     }
 });
@@ -172,20 +123,20 @@ yesBtn.addEventListener("click",()=>{
     document.getElementById("question").style.display="none";
     yesBtn.style.display="none";
     noBtn.style.display="none";
-    document.getElementById("centerSticker").style.display="none"; // Ortadaki GIF kaybolur
+    document.getElementById("centerSticker").style.display="none";
     document.getElementById("loveMessage").style.display="block";
     document.getElementById("danceBear").style.display="block";
     document.getElementById("music").play();
 
-    // Uçan kalpler
+    // Kalpler uçsun
     setInterval(()=>{
         const heart=document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML="💖";
-        heart.style.left=`${Math.random()*window.innerWidth}px`;
+        heart.style.left=Math.random()*window.innerWidth+"px";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),4000);
-    },250);
+    },200);
 });
 </script>
 
